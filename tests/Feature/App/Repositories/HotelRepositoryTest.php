@@ -89,6 +89,22 @@ class HotelRepositoryTest extends TestCase
         $this->assertCount(10, $hotels);
     }
 
+    public function test_pagination_empty(): void
+    {
+        $hotels = $this->repository->paginate();
+
+        $this->assertEquals(0, $hotels->total());
+    }
+
+    public function test_pagination(): void
+    {
+        Hotel::factory(20)->create();
+
+        $hotels = $this->repository->paginate();
+
+        $this->assertCount(15, $hotels->items());
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
