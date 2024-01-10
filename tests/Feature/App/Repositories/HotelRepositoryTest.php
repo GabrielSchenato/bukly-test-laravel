@@ -58,6 +58,22 @@ class HotelRepositoryTest extends TestCase
         $this->assertEquals($hotel->zip_code, $data->zip_code);
     }
 
+    public function test_delete(): void
+    {
+        $data = Hotel::factory()->create();
+
+        $hotel = $this->repository->delete($data->id);
+
+        $this->assertTrue($hotel);
+    }
+
+    public function test_delete_fail(): void
+    {
+        $this->expectException(ModelNotFoundException::class);
+        $this->repository->findById(1);
+    }
+
+
     protected function setUp(): void
     {
         parent::setUp();
