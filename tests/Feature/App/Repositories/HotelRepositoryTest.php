@@ -73,6 +73,21 @@ class HotelRepositoryTest extends TestCase
         $this->repository->findById(1);
     }
 
+    public function test_find_all_empty(): void
+    {
+        $hotels = $this->repository->findAll();
+
+        $this->assertCount(0, $hotels);
+    }
+
+    public function test_find_all(): void
+    {
+        Hotel::factory(10)->create();
+
+        $hotels = $this->repository->findAll();
+
+        $this->assertCount(10, $hotels);
+    }
 
     protected function setUp(): void
     {
