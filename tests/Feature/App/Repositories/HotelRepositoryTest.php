@@ -41,6 +41,23 @@ class HotelRepositoryTest extends TestCase
         $this->repository->findById(1);
     }
 
+    public function test_update(): void
+    {
+        $data = Hotel::factory()->create();
+
+        $name = 'Hotel Bacana';
+        $website = 'www.hotel.com';
+        $data->name = $name;
+        $data->website = $website;
+
+        $hotel = $this->repository->update($data->toArray());
+
+        $this->assertInstanceOf(Hotel::class, $hotel);
+        $this->assertEquals($hotel->name, $name);
+        $this->assertEquals($hotel->website, $website);
+        $this->assertEquals($hotel->zip_code, $data->zip_code);
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
