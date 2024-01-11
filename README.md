@@ -1,3 +1,58 @@
+## Passos para execução do projeto
+
+Necessário ter o docker instalado na máquina [Docker](https://www.docker.com/products/docker-desktop).
+
+Clonar o projeto em uma pasta de sua preferência:
+
+    git clone git@github.com:GabrielSchenato/bukly-test-laravel.git
+
+Copiar o arquivo `.env.example` para `.env` e configurar as variáveis:
+
+    DB_HOST=mysql
+    DB_DATABASE=laravel
+    DB_USERNAME=sail
+    DB_PASSWORD=password
+
+Rodar o composer install:
+
+    docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php83-composer:latest \
+    composer install --ignore-platform-reqs &&
+    php artisan key:generate
+
+Rodar o comando do sail para subir os containers da aplicação com o docker:
+
+    ./vendor/bin/sail up -d
+
+Rodar o comando para criar as tabelas do banco:
+
+    ./vendor/bin/sail php artisan migrate
+
+Rodar o seeder para criar os registros fakes no banco:
+
+    ./vendor/bin/sail php artisan db:seed
+
+Rodar o npm install para instalar as dependencias:
+
+    ./vendor/bin/sail npm install
+
+Rodar o npm para compilar o JS e CSS:
+
+    ./vendor/bin/sail npm run dev
+
+Rodar os testes para verificar que todos estão passando:
+
+    ./vendor/bin/sail php artisan test
+
+Acessar a aplicação e realizar os testes necessários:
+
+    http://localhost
+___
+
+
 # Teste de Habilidades em Laravel
 
 ## Objetivo
