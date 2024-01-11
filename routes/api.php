@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\HotelController;
+use App\Http\Controllers\Api\RoomController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,5 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResources([
-    'hotels' => HotelController::class
+    'hotels' => HotelController::class,
+    'rooms' => RoomController::class
 ]);
