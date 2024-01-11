@@ -19,9 +19,9 @@ Avaliar as habilidades do candidato em Laravel, compreensão e análise de requi
 
 Bonus (opcional):
 
-- Adicionar rotas API para ver e adicionar hotel
-- Usar seeder para alimentar as tabelas hotels e rooms
-- Usar Tailwind no lugar de Bootstrap
+- ✅ Adicionar rotas API para ver e adicionar hotel
+- ✅ Usar seeder para alimentar as tabelas hotels e rooms
+- ✅ Usar Tailwind no lugar de Bootstrap
 
 ## Avaliação
 O candidato será avaliado com base na implementação correta dos requisitos, a qualidade do código e a capacidade de resolução de problemas. A documentação e os testes também serão considerados na avaliação.
