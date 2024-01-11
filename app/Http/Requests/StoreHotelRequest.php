@@ -39,7 +39,7 @@ class StoreHotelRequest extends FormRequest
             ],
             'state' => [
                 'required',
-                'min:3',
+                'min:2',
                 'max:255'
             ],
             'zip_code' => [

@@ -48,11 +48,11 @@ class HotelEloquentRepository implements HotelRepositoryInterface
         return $categories->toArray();
     }
 
-    public function paginate(string $filter = '', $order = 'DESC', int $page = 1, int $totalPage = 15): LengthAwarePaginator
+    public function paginate(string $filter = '', $order = 'DESC', int $totalPage = 15): LengthAwarePaginator
     {
         return $this->model
             ->when($filter, fn($query) => $query->where('name', 'LIKE', "%{$filter}%"))
             ->orderBy('id', $order)
-            ->paginate();
+            ->paginate($totalPage);
     }
 }

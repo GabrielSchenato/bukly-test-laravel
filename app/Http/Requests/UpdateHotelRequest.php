@@ -11,7 +11,7 @@ class UpdateHotelRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -42,7 +42,7 @@ class UpdateHotelRequest extends FormRequest
             ],
             'state' => [
                 'required',
-                'min:3',
+                'min:2',
                 'max:255'
             ],
             'zip_code' => [
