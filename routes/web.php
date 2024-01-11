@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('hotels', HotelController::class);
+    Route::resource('rooms', RoomController::class);
 });
 
 require __DIR__ . '/auth.php';
