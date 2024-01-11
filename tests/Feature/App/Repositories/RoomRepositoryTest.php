@@ -20,11 +20,11 @@ class RoomRepositoryTest extends TestCase
     {
         $data = Room::factory()->raw();
 
-        $hotel = $this->repository->insert($data);
+        $room = $this->repository->insert($data);
 
-        $this->assertInstanceOf(Room::class, $hotel);
-        $this->assertEquals($hotel->name, $data['name']);
-        $this->assertDatabaseHas('hotels', [
+        $this->assertInstanceOf(Room::class, $room);
+        $this->assertEquals($room->name, $data['name']);
+        $this->assertDatabaseHas('rooms', [
             'name' => $data['name']
         ]);
     }
@@ -33,10 +33,10 @@ class RoomRepositoryTest extends TestCase
     {
         $data = Room::factory()->create();
 
-        $hotel = $this->repository->findById($data->id);
+        $room = $this->repository->findById($data->id);
 
-        $this->assertInstanceOf(Room::class, $hotel);
-        $this->assertEquals($hotel->name, $data['name']);
+        $this->assertInstanceOf(Room::class, $room);
+        $this->assertEquals($room->name, $data['name']);
     }
 
     public function test_find_by_id_fail(): void
@@ -50,25 +50,25 @@ class RoomRepositoryTest extends TestCase
         $data = Room::factory()->create();
 
         $name = 'Room Bacana';
-        $website = 'www.hotel.com';
+        $description = 'Description';
         $data->name = $name;
-        $data->website = $website;
+        $data->description = $description;
 
-        $hotel = $this->repository->update($data->toArray());
+        $room = $this->repository->update($data->toArray());
 
-        $this->assertInstanceOf(Room::class, $hotel);
-        $this->assertEquals($hotel->name, $name);
-        $this->assertEquals($hotel->website, $website);
-        $this->assertEquals($hotel->zip_code, $data->zip_code);
+        $this->assertInstanceOf(Room::class, $room);
+        $this->assertEquals($room->name, $name);
+        $this->assertEquals($room->description, $description);
+        $this->assertEquals($room->hotel_id, $data->hotel_id);
     }
 
     public function test_delete(): void
     {
         $data = Room::factory()->create();
 
-        $hotel = $this->repository->delete($data->id);
+        $room = $this->repository->delete($data->id);
 
-        $this->assertTrue($hotel);
+        $this->assertTrue($room);
     }
 
     public function test_delete_fail(): void
@@ -79,40 +79,40 @@ class RoomRepositoryTest extends TestCase
 
     public function test_find_all_empty(): void
     {
-        $hotels = $this->repository->findAll();
+        $rooms = $this->repository->findAll();
 
-        $this->assertCount(0, $hotels);
+        $this->assertCount(0, $rooms);
     }
 
     public function test_find_all(): void
     {
         Room::factory(10)->create();
 
-        $hotels = $this->repository->findAll();
+        $rooms = $this->repository->findAll();
 
-        $this->assertCount(10, $hotels);
+        $this->assertCount(10, $rooms);
     }
 
     public function test_pagination_empty(): void
     {
-        $hotels = $this->repository->paginate();
+        $rooms = $this->repository->paginate();
 
-        $this->assertEquals(0, $hotels->total());
+        $this->assertEquals(0, $rooms->total());
     }
 
     public function test_pagination(): void
     {
         Room::factory(20)->create();
 
-        $hotels = $this->repository->paginate();
+        $rooms = $this->repository->paginate();
 
-        $this->assertCount(15, $hotels->items());
+        $this->assertCount(15, $rooms->items());
     }
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->repository = new RoomEloquentRepository(new Room());
-        $this->hotelRepository = new HotelEloquentRepository(new Hotel());
+        $this->roomRepository = new HotelEloquentRepository(new Hotel());
     }
 }
